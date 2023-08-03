@@ -24,6 +24,8 @@ class NLPApp:
         password_label=Label(self.root,text='Enter your Password',bg='silver',fg='white').pack(pady=10)
         password_entry=Entry(self.root,width=50,show='*').pack(pady=10)
 
+        btn=Button(self.root,text='Register',activebackground='blue').pack(pady=10)
+
         btn=Button(self.root,text='Already a member? Login',activebackground='blue',command=self.__login).pack(pady=10)
 
     def __clear(self):
@@ -41,8 +43,23 @@ class NLPApp:
         password_label=Label(self.root,text='Enter your Password',bg='silver',fg='white').pack(pady=10)
         password_entry=Entry(self.root,width=50,show='*').pack(pady=10)
 
+        btn=Button(self.root,text='Login',activebackground='blue',command=self.__home).pack(pady=10)
 
         btn=Button(self.root,text='Not a member? Register',activebackground='blue',command=self.__register).pack(pady=10)
+
+
+    def __home(self):
+
+        self.__clear()
+        
+        NER_btn=Button(self.root,text='Named Entity Recognistion',width=50,activebackground='blue').pack(pady=20)
+
+        Semantic_btn=Button(self.root,text='Semantic Analysis',width=50,activebackground='blue').pack(pady=20)
+
+        Emotion_btn=Button(self.root,text='Emotin Detector',width=50,activebackground='blue').pack(pady=20)
+        
+
+
 
 
 
