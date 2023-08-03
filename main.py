@@ -52,12 +52,42 @@ class NLPApp:
 
         self.__clear()
         
-        NER_btn=Button(self.root,text='Named Entity Recognistion',width=50,activebackground='blue').pack(pady=20)
+        NER_btn=Button(self.root,text='Named Entity Recognistion',width=50,activebackground='blue',command=self.__NER).pack(pady=20)
 
-        Semantic_btn=Button(self.root,text='Semantic Analysis',width=50,activebackground='blue').pack(pady=20)
+        Semantic_btn=Button(self.root,text='Semantic Analysis',width=50,activebackground='blue',command=self.__Sentiment_Analysis).pack(pady=20)
 
-        Emotion_btn=Button(self.root,text='Emotin Detector',width=50,activebackground='blue').pack(pady=20)
-        
+        Emotion_btn=Button(self.root,text='Emotin Detector',width=50,activebackground='blue',command=self.__Emotion_Analysis).pack(pady=20)
+
+
+    def __NER(self):
+        self.__clear()
+
+        Text_label=Label(self.root,text='Enter your string here',width=50,bg='silver',fg='white').pack(pady=20)
+        string_entry=Entry(self.root,width=50).pack(pady=20)
+        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue').pack(pady=20)
+        response=Label(self.root,text='A').pack(pady=20)
+        Back=Button(self.root,text='Home',width=50,activebackground='blue',command=self.__home).pack(pady=20)
+
+    def __Sentiment_Analysis(self):
+        self.__clear()
+
+        Text_label=Label(self.root,text='Enter your string here',width=50,bg='silver',fg='white').pack(pady=20)
+        string_entry=Entry(self.root,width=50).pack(pady=20)
+        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue').pack(pady=20)
+        response=Label(self.root,text='A').pack(pady=20)
+        Back=Button(self.root,text='Home',width=50,activebackground='blue',command=self.__home).pack(pady=20)
+
+    def __Emotion_Analysis(self):
+        self.__clear()
+
+        Text_label=Label(self.root,text='Enter your string here',width=50,bg='silver',fg='white').pack(pady=20)
+        string_entry=Entry(self.root,width=50).pack(pady=20)
+        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue').pack(pady=20)
+        response=Label(self.root,text='A').pack(pady=20)
+        Back=Button(self.root,text='Home',width=50,activebackground='blue',command=self.__home).pack(pady=20)
+
+
+
 
 
 
