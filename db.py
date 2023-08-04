@@ -20,9 +20,13 @@ class Database_:
             return 1
         
     def login(self,email,password):
+        if email in self.db:
 
-        if self.db[email][1]==password:
-            return 1
+
+            if self.db[email][1]==password:
+                return 1
+            else:
+                return 0
         else:
             return 0
 

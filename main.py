@@ -2,12 +2,14 @@ from tkinter import *
 import tkinter
 from db import Database_
 from tkinter import messagebox
+from API import API
 
 class NLPApp:
 
     def __init__(self):
         self.root= Tk()
         self.db=Database_()
+        self.api=API()
         self.root.title("NLPApp")
         self.root.geometry("400x500") 
         self.__register()
@@ -87,38 +89,57 @@ class NLPApp:
         
         NER_btn=Button(self.root,text='Named Entity Recognistion',width=50,activebackground='blue',command=self.__NER).pack(pady=20)
 
-        Semantic_btn=Button(self.root,text='Semantic Analysis',width=50,activebackground='blue',command=self.__Sentiment_Analysis).pack(pady=20)
+        Semantic_btn=Button(self.root,text='Sentiment Analysis',width=50,activebackground='blue',command=self.__Sentiment_Analysis).pack(pady=20)
 
-        Emotion_btn=Button(self.root,text='Emotin Detector',width=50,activebackground='blue',command=self.__Emotion_Analysis).pack(pady=20)
+        Emotion_btn=Button(self.root,text='Emotion Detector',width=50,activebackground='blue',command=self.__Emotion_Analysis).pack(pady=20)
 
 
     def __NER(self):
         self.__clear()
 
+        self.txt=tkinter.StringVar()
+
         Text_label=Label(self.root,text='Enter your string here',width=50,bg='silver',fg='white').pack(pady=20)
-        string_entry=Entry(self.root,width=50).pack(pady=20)
-        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue').pack(pady=20)
-        response=Label(self.root,text='A').pack(pady=20)
+        string_entry=Entry(self.root,width=50,textvariable=self.txt).pack(pady=20)
+        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue',command=self.__perform_NER).pack(pady=20)
+        self.NER_result=Label(self.root,text='')
+        self.NER_result.pack(pady=20)
         Back=Button(self.root,text='Home',width=50,activebackground='blue',command=self.__home).pack(pady=20)
+
+    def __perform_NER(self):
+        response=self.api.ner(self.txt.get())
+        self.NER_result['text']=response
+
+
 
     def __Sentiment_Analysis(self):
         self.__clear()
+        self.txt2=tkinter.StringVar()
 
         Text_label=Label(self.root,text='Enter your string here',width=50,bg='silver',fg='white').pack(pady=20)
-        string_entry=Entry(self.root,width=50).pack(pady=20)
-        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue').pack(pady=20)
-        response=Label(self.root,text='A').pack(pady=20)
+        string_entry=Entry(self.root,width=50,textvariable=self.txt2).pack(pady=20)
+        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue',command=self.__perform_sentiment).pack(pady=20)
+        self.sentiment_result=Label(self.root,text='B')
+        self.sentiment_result.pack(pady=20)
         Back=Button(self.root,text='Home',width=50,activebackground='blue',command=self.__home).pack(pady=20)
+
+    def __perform_sentiment(self):
+        text1=self.txt2.get()
+        self.response=self.api.sentiment_analysis(text1)
+        self.sentiment_result['text']=self.response
 
     def __Emotion_Analysis(self):
         self.__clear()
-
+        self.emotion=tkinter.StringVar()
         Text_label=Label(self.root,text='Enter your string here',width=50,bg='silver',fg='white').pack(pady=20)
-        string_entry=Entry(self.root,width=50).pack(pady=20)
-        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue').pack(pady=20)
-        response=Label(self.root,text='A').pack(pady=20)
+        string_entry=Entry(self.root,width=50,textvariable=self.emotion).pack(pady=20)
+        Analyse=Button(self.root,text='Analyse',width=50,activebackground='blue',command=self.__perform_Emotion).pack(pady=20)
+        self.emotion_result=Label(self.root,text='').pack(pady=20)
         Back=Button(self.root,text='Home',width=50,activebackground='blue',command=self.__home).pack(pady=20)
-
+    
+    def __perform_Emotion(self):
+        response=self.api.emotion_prediction(self.emotion.get())
+        self.emotion_result['text']=response
 
 
 
